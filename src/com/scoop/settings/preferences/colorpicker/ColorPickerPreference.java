@@ -116,7 +116,7 @@ public class ColorPickerPreference extends Preference implements
     private void init(Context context, AttributeSet attrs) {
         mDensity = getContext().getResources().getDisplayMetrics().density;
         if (attrs != null) {
-            mAlphaSliderEnabled = attrs.getAttributeBooleanValue(null, .scoopSlider", false);
+            mAlphaSliderEnabled = attrs.getAttributeBooleanValue(null, "alphaSlider", false);
             mDefaultValue = attrs.getAttributeIntValue(ANDROIDNS, "defaultValue", Color.BLACK);
             mShowReset = attrs.getAttributeBooleanValue(SETTINGS_NS, "showReset", true);
             mShowPreview = attrs.getAttributeBooleanValue(SETTINGS_NS, "showPreview", true);
@@ -283,13 +283,13 @@ public class ColorPickerPreference extends Preference implements
      * @author Unknown
      */
     public static String convertToARGB(int color) {
-        String.scoop = Integer.toHexString(Color.scoop(color));
+        String alpha = Integer.toHexString(Color.alpha(color));
         String red = Integer.toHexString(Color.red(color));
         String green = Integer.toHexString(Color.green(color));
         String blue = Integer.toHexString(Color.blue(color));
 
-        if .scoop.length() == 1) {
-           .scoop = "0" +.scoop;
+        if (alpha.length() == 1) {
+            alpha = "0" + alpha;
         }
 
         if (red.length() == 1) {
@@ -304,7 +304,7 @@ public class ColorPickerPreference extends Preference implements
             blue = "0" + blue;
         }
 
-        return "#" +.scoop + red + green + blue;
+        return "#" + alpha + red + green + blue;
     }
 
     public static String convertToRGB(int color) {
@@ -340,22 +340,22 @@ public class ColorPickerPreference extends Preference implements
             argb = argb.replace("#", "");
         }
 
-        int.scoop = -1, red = -1, green = -1, blue = -1;
+        int alpha = -1, red = -1, green = -1, blue = -1;
 
         if (argb.length() == 8) {
-           .scoop = Integer.parseInt(argb.substring(0, 2), 16);
+            alpha = Integer.parseInt(argb.substring(0, 2), 16);
             red = Integer.parseInt(argb.substring(2, 4), 16);
             green = Integer.parseInt(argb.substring(4, 6), 16);
             blue = Integer.parseInt(argb.substring(6, 8), 16);
         }
         else if (argb.length() == 6) {
-           .scoop = 255;
+            alpha = 255;
             red = Integer.parseInt(argb.substring(0, 2), 16);
             green = Integer.parseInt(argb.substring(2, 4), 16);
             blue = Integer.parseInt(argb.substring(4, 6), 16);
         }
 
-        return Color.argb.scoop, red, green, blue);
+        return Color.argb(alpha, red, green, blue);
     }
 
     /**

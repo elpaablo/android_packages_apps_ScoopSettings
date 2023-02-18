@@ -36,7 +36,7 @@ import android.view.View;
 
 /**
  * Displays a color picker to the user and allow them
- * to select a color. A slider for the.scoop channel is
+ * to select a color. A slider for the alpha channel is
  * also available. Enable it by setting
  * setAlphaSliderVisible(boolean) to true.
  * @author Daniel Nilsson
@@ -45,7 +45,7 @@ public class ColorPickerView extends View {
 
     private final static int    PANEL_SAT_VAL = 0;
     private final static int    PANEL_HUE = 1;
-    private final static int    PANEL.SCOOP = 2;
+    private final static int    PANEL_ALPHA = 2;
 
     /**
      * The width in pixels of the border
@@ -58,9 +58,9 @@ public class ColorPickerView extends View {
      */
     private float         HUE_PANEL_WIDTH = 30f;
     /**
-     * The height in dp of the.scoop panel
+     * The height in dp of the alpha panel
      */
-    private float       .SCOOP_PANEL_HEIGHT = 20f;
+    private float        ALPHA_PANEL_HEIGHT = 20f;
     /**
      * The distance in dp between the different
      * color panels.
@@ -71,7 +71,7 @@ public class ColorPickerView extends View {
      */
     private float         PALETTE_CIRCLE_TRACKER_RADIUS = 5f;
     /**
-     * The dp which the tracker of the hue or.scoop panel
+     * The dp which the tracker of the hue or alpha panel
      * will extend outside of its bounds.
      */
     private float        RECTANGLE_TRACKER_OFFSET = 2f;
@@ -158,7 +158,7 @@ public class ColorPickerView extends View {
         PALETTE_CIRCLE_TRACKER_RADIUS *= mDensity;
         RECTANGLE_TRACKER_OFFSET *= mDensity;
         HUE_PANEL_WIDTH *= mDensity;
-       .SCOOP_PANEL_HEIGHT *= mDensity;
+        ALPHA_PANEL_HEIGHT *= mDensity;
         PANEL_SPACING = PANEL_SPACING * mDensity;
 
         mDrawingOffset = calculateRequiredOffset();
@@ -341,7 +341,7 @@ public class ColorPickerView extends View {
 
         float rectWidth = 4 * mDensity / 2;
 
-        Point p =.scoopToPoint(mAlpha);
+        Point p = alphaToPoint(mAlpha);
 
         RectF r = new RectF();
         r.left = p.x - rectWidth;
@@ -381,14 +381,14 @@ public class ColorPickerView extends View {
         return p;
     }
 
-    private Point.scoopToPoint(int.scoop){
+    private Point alphaToPoint(int alpha){
 
         final RectF rect = mAlphaRect;
         final float width = rect.width();
 
         Point p = new Point();
 
-        p.x = (int) (width - .scoop * width / 0xff) + rect.left);
+        p.x = (int) (width - (alpha * width / 0xff) + rect.left);
         p.y = (int) rect.top;
 
         return p;
@@ -527,23 +527,23 @@ public class ColorPickerView extends View {
 
                 break;
 
-            case PANEL.SCOOP:
+            case PANEL_ALPHA:
 
                 if(!mShowAlphaPanel || mAlphaRect == null){
                     update = false;
                 }
                 else{
 
-                    int.scoop = (int) (mAlpha - x*10);
+                    int alpha = (int) (mAlpha - x*10);
 
-                    if.scoop < 0){
-                       .scoop = 0;
+                    if(alpha < 0){
+                        alpha = 0;
                     }
-                    else if.scoop > 0xff){
-                       .scoop = 0xff;
+                    else if(alpha > 0xff){
+                        alpha = 0xff;
                     }
 
-                    mAlpha =.scoop;
+                    mAlpha = alpha;
 
 
                     update = true;
@@ -645,7 +645,7 @@ public class ColorPickerView extends View {
         }
         else if(mAlphaRect != null && mAlphaRect.contains(startX, startY)){
 
-            mLastTouchedPanel = PANEL.SCOOP;
+            mLastTouchedPanel = PANEL_ALPHA;
 
             mAlpha = pointToAlpha((int)event.getX());
 
@@ -686,11 +686,11 @@ public class ColorPickerView extends View {
         }
         else{
 
-            width = (int) (heightAllowed -.SCOOP_PANEL_HEIGHT + HUE_PANEL_WIDTH);
+            width = (int) (heightAllowed - ALPHA_PANEL_HEIGHT + HUE_PANEL_WIDTH);
 
             if(width > widthAllowed){
                 width = widthAllowed;
-                height = (int) (widthAllowed - HUE_PANEL_WIDTH +.SCOOP_PANEL_HEIGHT);
+                height = (int) (widthAllowed - HUE_PANEL_WIDTH + ALPHA_PANEL_HEIGHT);
             }
             else{
                 height = heightAllowed;
@@ -722,7 +722,7 @@ public class ColorPickerView extends View {
         int width = getPrefferedHeight();
 
         if(mShowAlphaPanel){
-            width -= (PANEL_SPACING +.SCOOP_PANEL_HEIGHT);
+            width -= (PANEL_SPACING + ALPHA_PANEL_HEIGHT);
         }
 
 
@@ -735,7 +735,7 @@ public class ColorPickerView extends View {
         int height = (int)(200 * mDensity);
 
         if(mShowAlphaPanel){
-            height += PANEL_SPACING +.SCOOP_PANEL_HEIGHT;
+            height += PANEL_SPACING + ALPHA_PANEL_HEIGHT;
         }
 
         return height;
@@ -764,7 +764,7 @@ public class ColorPickerView extends View {
         float panelSide = dRect.height() - BORDER_WIDTH_PX * 2;
 
         if(mShowAlphaPanel){
-            panelSide -= PANEL_SPACING +.SCOOP_PANEL_HEIGHT;
+            panelSide -= PANEL_SPACING + ALPHA_PANEL_HEIGHT;
         }
 
         float left = dRect.left + BORDER_WIDTH_PX;
@@ -781,7 +781,7 @@ public class ColorPickerView extends View {
         float left = dRect.right - HUE_PANEL_WIDTH + BORDER_WIDTH_PX;
         float top = dRect.top + BORDER_WIDTH_PX;
         float bottom = dRect.bottom - BORDER_WIDTH_PX - (mShowAlphaPanel
-            ? (PANEL_SPACING +.SCOOP_PANEL_HEIGHT) : 0);
+            ? (PANEL_SPACING + ALPHA_PANEL_HEIGHT) : 0);
         float right = dRect.right - BORDER_WIDTH_PX;
 
         mHueRect = new RectF(left, top, right, bottom);
@@ -794,7 +794,7 @@ public class ColorPickerView extends View {
         final RectF    dRect = mDrawingRect;
 
         float left = dRect.left + BORDER_WIDTH_PX;
-        float top = dRect.bottom -.SCOOP_PANEL_HEIGHT + BORDER_WIDTH_PX;
+        float top = dRect.bottom - ALPHA_PANEL_HEIGHT + BORDER_WIDTH_PX;
         float bottom = dRect.bottom - BORDER_WIDTH_PX;
         float right = dRect.right - BORDER_WIDTH_PX;
 
@@ -860,7 +860,7 @@ public class ColorPickerView extends View {
      */
     public void setColor(int color, boolean callback){
 
-        int.scoop = Color.scoop(color);
+        int alpha = Color.alpha(color);
         int red = Color.red(color);
         int blue = Color.blue(color);
         int green = Color.green(color);
@@ -869,7 +869,7 @@ public class ColorPickerView extends View {
 
         Color.RGBToHSV(red, green, blue, hsv);
 
-        mAlpha =.scoop;
+        mAlpha = alpha;
         mHue = hsv[0];
         mSat = hsv[1];
         mVal = hsv[2];
@@ -894,8 +894,8 @@ public class ColorPickerView extends View {
     }
 
     /**
-     * Set if the user is allowed to adjust the.scoop panel. Default is false.
-     * If it is set to false no.scoop will be set.
+     * Set if the user is allowed to adjust the alpha panel. Default is false.
+     * If it is set to false no alpha will be set.
      * @param visible
      */
     public void setAlphaSliderVisible(boolean visible){
@@ -932,7 +932,7 @@ public class ColorPickerView extends View {
 
     /**
      * Set the text that should be shown in the
-     *.scoop slider. Set to null to disable text.
+     * alpha slider. Set to null to disable text.
      * @param res string resource id.
      */
     public void setAlphaSliderText(int res){
@@ -942,7 +942,7 @@ public class ColorPickerView extends View {
 
     /**
      * Set the text that should be shown in the
-     *.scoop slider. Set to null to disable text.
+     * alpha slider. Set to null to disable text.
      * @param text Text that should be shown.
      */
     public void setAlphaSliderText(String text){
@@ -952,7 +952,7 @@ public class ColorPickerView extends View {
 
     /**
      * Get the current value of the text
-     * that will be shown in the.scoop
+     * that will be shown in the alpha
      * slider.
      * @return
      */

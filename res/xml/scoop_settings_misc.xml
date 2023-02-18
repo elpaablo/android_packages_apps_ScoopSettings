@@ -23,6 +23,6 @@
     <Preference
         android:key="spoofing"
         android:title="@string/spoofing_title"
-        android:fragment="com.alpha.settings.fragments.misc.Spoofing" />
+        android:fragment="com.scoop.settings.fragments.misc.Spoofing" />
 
 </PreferenceScreen>

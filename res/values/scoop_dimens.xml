@@ -16,5 +16,6 @@
      limitations under the License.
 -->
 <resources>
-
+    <!-- Oval preview size -->
+    <dimen name="oval_notification_size">26dp</dimen>
 </resources>
