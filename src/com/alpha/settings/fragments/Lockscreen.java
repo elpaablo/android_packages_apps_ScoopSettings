@@ -44,16 +44,16 @@ import java.util.List;
 import lineageos.providers.LineageSettings;
 
 @SearchIndexable
-public class UserInterface extends SettingsPreferenceFragment
+public class LockScreen extends SettingsPreferenceFragment
             implements Preference.OnPreferenceChangeListener  {
 
-    public static final String TAG = "UserInterface";
+    public static final String TAG = "LockScreen";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.alpha_settings_ui);
+        addPreferencesFromResource(R.xml.alpha_settings_lockscreen);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class UserInterface extends SettingsPreferenceFragment
      * For search
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.alpha_settings_ui) {
+            new BaseSearchIndexProvider(R.xml.alpha_settings_lockscreen) {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
