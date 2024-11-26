@@ -19,6 +19,12 @@
             android:summary="@string/spoofing_pif_toggle_summary"
             android:defaultValue="true" />
 
+        <!-- JSON file picker -->
+        <Preference
+            android:key="pif_json_file_preference"
+            android:title="@string/pif_spoofing_title"
+            android:summary="@string/pif_spoofing_summary"/>
+
         <!-- Pixel props -->
         <com.scoop.settings.preferences.SystemPropertySwitchPreference
             android:key="persist.sys.pphooks.enable"

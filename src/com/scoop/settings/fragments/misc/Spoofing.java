@@ -4,10 +4,14 @@
  */
 package com.scoop.settings.fragments.misc;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
@@ -22,6 +26,10 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 
+import org.json.JSONObject;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
 import java.util.List;
 
 @SearchIndexable
@@ -31,6 +39,9 @@ public class Spoofing extends SettingsPreferenceFragment implements
     private static final String TAG = "Spoofing";
     private static final String KEY_SYSTEM_WIDE_CATEGORY = "spoofing_system_wide_category";
     private static final String KEY_PIXEL_PROPS = "persist.sys.pphooks.enable";
+
+    private static final String KEY_PIF_JSON_FILE_PREFERENCE = "pif_json_file_preference";
+    private Preference mPifJsonFilePreference;
 
     private PreferenceCategory mSystemWideCategory;
     private SystemPropertySwitchPreference mPixelPropsSwitch;
@@ -51,6 +62,41 @@ public class Spoofing extends SettingsPreferenceFragment implements
                 com.android.internal.R.bool.config_enablePixelProps);
         if (mPixelPropsSwitch != null && !enablePixelProps) {
             mSystemWideCategory.removePreference(mPixelPropsSwitch);
+        }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (KEY_PIF_JSON_FILE_PREFERENCE.equals(preference.getKey())) {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("application/json");
+            startActivityForResult(intent, 10001);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10001 && resultCode == Activity.RESULT_OK) {
+            Uri uri = data.getData();
+            Log.d(TAG, "URI received: " + uri.toString());
+            try (InputStream inputStream = getActivity().getContentResolver().openInputStream(uri)) {
+                if (inputStream != null) {
+                    String json = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+                    Log.d(TAG, "JSON data: " + json);
+                    JSONObject jsonObject = new JSONObject(json);
+                    for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
+                        String key = it.next();
+                        String value = jsonObject.getString(key);
+                        Log.d(TAG, "Setting property: persist.sys.pihooks_" + key + " = " + value);
+                        SystemProperties.set("persist.sys.pihooks_" + key, value);
+                    }
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Error reading JSON or setting properties", e);
+            }
         }
     }
 

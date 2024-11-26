@@ -91,9 +91,8 @@
     <string name="custom_timeout_summary_48hours">48 hours</string>
     <string name="custom_timeout_summary_72hours">72 hours</string>
 
-    <!-- Miscellaneous -->
+    <!-- Spoofing -->
     <string name="miscellaneous_spoofing_category">Spoofing</string>
-    <!-- Miscellaneous/Spoofing -->
     <string name="spoofing_title">Component spoofing</string>
     <string name="spoofing_summary">Bypass app restrictions by spoofing components</string>
     <string name="spoofing_system_wide_category">System-Wide</string>
@@ -112,5 +111,7 @@
     <string name="spoofing_games_summary">Spoof the device as different models for select games to unlock higher FPS</string>
     <string name="spoofing_snap_title">Snapchat spoof</string>
     <string name="spoofing_snap_summary">Spoof Snapchat as a Pixel XL to fix possible chat issues</string>
+    <string name="pif_spoofing_title">Select PIF JSON File</string>
+    <string name="pif_spoofing_summary">Pick PIF JSON file to be used for spoofing play integrity</string>
 
 </resources>
