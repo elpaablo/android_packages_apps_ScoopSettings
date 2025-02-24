@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2016-2022 crDroid Android Project
+     Copyright (C) 2023-2024 AlphaDroid Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- General strings -->
+    <string name="string_ok">OK</string>
+    <string name="string_reset">Reset</string>
+    <string name="string_cancel">Cancel</string>
+    <string name="string_save">Save</string>
+    <string name="string_discard_changes">Discard changes</string>
+    <string name="string_never">Never</string>
+    <string name="string_always">Always</string>
+    <string name="string_caution">Caution</string>
+    <string name="string_delete">Delete</string>
+    <string name="string_delete_message">Remove selected item?</string>
+    <string name="string_choose_app">Choose app</string>
+    <string name="string_enable">Enable</string>
+    <string name="string_disable">Disable</string>
+    <string name="string_on">On</string>
+    <string name="string_off">Off</string>
+
+     <!--  Scoopdroid settings -->
+    <string name="scoop_settings_title">Scoopdroid settings</string>
+    <string name="scoop_settings_summary">Our custom settings space</string>
+
+    <!-- Personalization Categories -->
+    <string name="button_title">Buttons</string>
+    <string name="misc_title">Miscellaneous</string>
+    <string name="statusbar_title">Status Bar</string>
+
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on color below to apply</string>
+    <string name="arrow_right" translatable="false">→</string>
+    <string name="arrow_down" translatable="false">↓</string>
+    <string name="hex" translatable="false">Hex:</string>
+    <string name="hex_hint" translatable="false">#ff000000</string>
+    <string name="set">Set</string>
+    <string name="color_default">Default</string>
+
+     <!-- Custom seekbar -->
+    <string name="custom_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">by default</string>
+    <string name="custom_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong tap to set</string>
+    <string name="custom_seekbar_default_value_is_set">Default value is set</string>
+
+    <!-- Units -->
+    <string name="unit_seconds">seconds</string>
+    <string name="unit_milliseconds">milliseconds</string>
+    <string name="unit_pixels" translatable="false">dp</string>
+    <string name="unit_hz" translatable="false">hz</string>
+
+      <!-- App Title -->
+    <string name="reset_settings_title">Reset settings</string>
+    <string name="reset_settings_message">This will reset most Scoopdroid settings to their default values for the current user. Would you like to continue?</string>
+
+    <!-- Timeouts -->
+    <string name="custom_timeout_summary_never">Never</string>
+    <string name="custom_timeout_summary_5secs">5 seconds</string>
+    <string name="custom_timeout_summary_10secs">10 seconds</string>
+    <string name="custom_timeout_summary_15secs">15 seconds</string>
+    <string name="custom_timeout_summary_30secs">30 seconds</string>
+    <string name="custom_timeout_summary_1min">1 minute</string>
+    <string name="custom_timeout_summary_2mins">2 minutes</string>
+    <string name="custom_timeout_summary_5mins">5 minutes</string>
+    <string name="custom_timeout_summary_10mins">10 minutes</string>
+    <string name="custom_timeout_summary_20mins">20 minutes</string>
+    <string name="custom_timeout_summary_30mins">30 minutes</string>
+    <string name="custom_timeout_summary_1hour">1 hour</string>
+    <string name="custom_timeout_summary_2hours">2 hours</string>
+    <string name="custom_timeout_summary_4hours">4 hours</string>
+    <string name="custom_timeout_summary_8hours">8 hours</string>
+    <string name="custom_timeout_summary_12hours">12 hours</string>
+    <string name="custom_timeout_summary_24hours">24 hours</string>
+    <string name="custom_timeout_summary_36hours">36 hours</string>
+    <string name="custom_timeout_summary_48hours">48 hours</string>
+    <string name="custom_timeout_summary_72hours">72 hours</string>
+
+</resources>
