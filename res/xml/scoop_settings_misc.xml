@@ -25,4 +25,11 @@
         android:title="@string/spoofing_title"
         android:fragment="com.scoop.settings.fragments.misc.Spoofing" />
 
+    <!-- Ignore secure window -->
+    <com.scoop.settings.preferences.GlobalSettingSwitchPreference
+        android:key="window_ignore_secure"
+        android:title="@string/ignore_window_secure_title"
+        android:summary="@string/ignore_window_secure_summary"
+        android:defaultValue="false"/>
+
 </PreferenceScreen>
